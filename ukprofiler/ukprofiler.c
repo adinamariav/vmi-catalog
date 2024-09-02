@@ -365,10 +365,10 @@ gather_stack_trace(vmi_instance_t vmi, stack_frame_t * stack,
                 return -1;
             }
         } else {
-            if (vmi_read_64_va(vmi, frame_pointer, 0, &next_frame_pointer) !=
+            if (vmi_read_64_pa(vmi, frame_pointer, &next_frame_pointer) !=
                 VMI_SUCCESS) {
                 fprintf(stderr,
-                        "Failed to read memory at virtual address: 0x%lx\n",
+                        "Failed to read memory at physical address: 0x%lx\n",
                         frame_pointer);
                 return -1;
             }
@@ -401,10 +401,10 @@ gather_stack_trace(vmi_instance_t vmi, stack_frame_t * stack,
                 return -1;
             }
         } else {
-            if (vmi_read_64_va(vmi, return_address_fp, 0, &return_address) !=
+            if (vmi_read_64_pa(vmi, return_address_fp, &return_address) !=
                 VMI_SUCCESS) {
                 fprintf(stderr,
-                        "Failed to read return address from virtual address: 0x%lx\n",
+                        "Failed to read return address from physical address: 0x%lx\n",
                         return_address_fp);
                 return -1;
             }
