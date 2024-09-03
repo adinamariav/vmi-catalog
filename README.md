@@ -27,6 +27,20 @@ Once KVM-VMI is set up, proceed to install the  [`libvmi` fork tailored for Unik
    sudo make install
    ```
 
+After installing, you need to create the `/etc/libvmi.conf` file containing the path to the `.dbg` file built along with the unikernel image, as well as offsets of the following members of internal structures within Unikraft:
+
+   ```bash
+   NGINX_appcompat_1.25 {
+    ostype = "Unikraft";
+    sysmap = "/home/.unikraft/build/nginx_qemu-x86_64.dbg";   /* kernel .dbg file path */
+    uk_thread_list = 0x48;                                    /* uk_sched_head->thread_list */
+    uk_thread_list_last = 0x8;                                /* uk_thread_list->tqh_last */
+    uk_thread_name = 0xb8;                                    /* uk_thread->name */
+    uk_thread_next = 0xc0;                                    /* uk_thread->next */
+    uk_pt = 0x8;                                              /* uk_vas->pt */
+   }
+
+   ```
 
 ## Running a Unikraft app with Libvirt
 
